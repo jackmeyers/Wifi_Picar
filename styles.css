@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+}
+
+.green {
+    color: green !important;
+}
+
+.grey {
+    grey: green !important;
+}
+
+.arrow {
+    font-size:50px; 
+}
