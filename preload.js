@@ -10,3 +10,6 @@ window.addEventListener('DOMContentLoaded', () => {
     replaceText(`${type}-version`, process.versions[type])
   }
 })
+
+const { contextBridge } = require("electron");
+contextBridge.exposeInMainWorld("net", require("net"));

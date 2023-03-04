@@ -2,17 +2,15 @@ document.onkeydown = updateKey;
 document.onkeyup = resetKey;
 
 var server_port = 65432;
-var server_addr = "24.18.178.149";   // the IP address of your Raspberry PI
+var server_addr = "192.168.86.87";   // the IP address of your Raspberry PI
 
 function send_data(data) {
     console.log(data);
 }
 
 function client(){
-    
-    const net = require('net');
     var input = document.getElementById("message").value;
-
+    const net = window.net;
     const client = net.createConnection({ port: server_port, host: server_addr }, () => {
         // 'connect' listener.
         console.log('connected to server!');
@@ -20,7 +18,15 @@ function client(){
         client.write(`${input}\r\n`);
     });
     
-    // get the data from the server
+    // if (client == null){
+    //     console.log("null")
+    // }
+    // else{
+    //     console.log("not null!!")
+    // }
+    console.log(client)
+
+    //get the data from the server
     client.on('data', (data) => {
         document.getElementById("bluetooth").innerHTML = data;
         console.log(data.toString());
@@ -30,6 +36,8 @@ function client(){
 
     client.on('end', () => {
         console.log('disconnected from server');
+        client.end();
+        client.destroy();
     });
 
 }
@@ -63,7 +71,6 @@ function updateKey(e) {
 
 // reset the key to the start state 
 function resetKey(e) {
-
     e = e || window.event;
     document.getElementById("upArrow").classList.replace("green","grey");
     document.getElementById("downArrow").classList.replace("green","grey");
@@ -77,5 +84,5 @@ function update_data(){
     setInterval(function(){
         // get image from python server
         client();
-    }, 50);
+    }, 1000);
 }

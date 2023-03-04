@@ -1,9 +1,9 @@
 import socket
 import sys
 sys.path.insert(0, '/home/pi/picar-4wd')
-import picar_4wd as fc
+#import picar_4wd as fc
 
-HOST = "24.18.178.149" # IP address of your Raspberry PI
+HOST = "192.168.86.87" # IP address of your Raspberry PI
 PORT = 65432          # Port to listen on (non-privileged ports are > 1023)
 
 #make a car
