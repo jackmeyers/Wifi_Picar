@@ -11,5 +11,5 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-const { contextBridge } = require("electron");
-contextBridge.exposeInMainWorld("net", require("net"));
+//const { contextBridge } = require("electron");
+//contextBridge.exposeInMainWorld("net", require("node:net"));

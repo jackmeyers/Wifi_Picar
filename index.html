@@ -6,8 +6,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="index.js"></script>
-  <script src="main.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 </head>
 
 <body>
@@ -43,15 +42,12 @@
         <input id="message" type="text" placeholder="message to Pi" />
         <button class="btn btn-success" onclick="update_data()">Sumbit</button>
         <p>
-          <span id="direction_dot" class="green">&bull;</span> Car Direction: <span id="direction"> </span>
-          <br>
           <span id="speed_dot" class="green">&bull;</span> Speed: <span id="speed">0.0</span>
           <br>
-          <span id="distance_dot" class="green">&bull;</span> Distance Traveled: <span id="distance">0.0</span>
+          <span id="power_dot" class="green">&bull;</span> Power: <span id="power">0.0</span>
           <br>
-          <span id="temprature_dot" class="green">&bull;</span> Temperature of the Pi: <span id="temperature">0.0</span>
+          <span id="temperature_dot" class="green">&bull;</span> Temperature of the Pi: <span id="temperature">0.0</span>
           <br>
-          Bluetooth return value: <span id="bluetooth"> </span>
         </p>
       </div>
     </div>

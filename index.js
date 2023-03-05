@@ -6,25 +6,18 @@ var server_addr = "192.168.86.87";   // the IP address of your Raspberry PI
 
 function send_data(data) {
     console.log(data);
+    client();
 }
 
 function client(){
-    var input = document.getElementById("message").value;
-    const net = window.net;
+    const net = require('net');
+
     const client = net.createConnection({ port: server_port, host: server_addr }, () => {
         // 'connect' listener.
         console.log('connected to server!');
         // send the message
-        client.write(`${input}\r\n`);
+        //client.write(`${input}\r\n`);
     });
-    
-    // if (client == null){
-    //     console.log("null")
-    // }
-    // else{
-    //     console.log("not null!!")
-    // }
-    console.log(client)
 
     //get the data from the server
     client.on('data', (data) => {
@@ -39,8 +32,40 @@ function client(){
         client.end();
         client.destroy();
     });
-
 }
+
+function updateMetrics(data) {
+    var metrics = data.split(",");
+    var power = metrics[0].split(":")[1];
+    var temp = metrics[1].split(":")[1];
+    var speed = metrics[2].split(":")[1];
+    document.getElementById("power").innerHTML = power;
+    document.getElementById("speed").innerHTML = speed;
+    document.getElementById("temperature").innerHTML = temp;
+}
+
+function updateCarMetrics(){
+    const net = require('net');
+    const client = net.createConnection({ port: server_port, host: server_addr }, () => {
+        console.log('connected to server!');
+    });
+
+    client.write("data please");
+    client.on('data', (data) => {
+        //index.js:47 power:7.37,temp:49.17,speed:0.0
+        updateMetrics(data.toString());
+        client.end();
+        client.destroy();
+    });
+
+    client.on('end', () => {
+        console.log('disconnected from server');
+        client.end();
+        client.destroy();
+    });
+}
+
+
 
 // for detecting which key is been pressed w,a,s,d
 function updateKey(e) {
@@ -82,7 +107,8 @@ function resetKey(e) {
 // update data for every 50ms
 function update_data(){
     setInterval(function(){
-        // get image from python server
-        client();
-    }, 1000);
+        updateCarMetrics();
+    }, 500);
 }
+
+update_data();
